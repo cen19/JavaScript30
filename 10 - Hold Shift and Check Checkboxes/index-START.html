@@ -100,23 +100,24 @@
 
 <script>
   const items = document.querySelectorAll('.inbox input[type=checkbox]');
-
   let lastClicked = '';
-// looping through and checking for the 'check' is more robust becuase it'll still work if someone changes some of the HTML DOM elements
+
   const handleCheck = function(e) {
-    let inBetween = false;
-    if (e.shiftKey && this.checked) {
+    let needToCheck = false;
+    if (e.shiftKey) {
       items.forEach(item => {
         if (item === this || item === lastClicked) {
-          inBetween = !inBetween;
+          needToCheck = !needToCheck;
         }
-        if (inBetween) {
+        console.log(this);
+        if (needToCheck) {
           item.checked = true;
         }
       });
     }
     lastClicked = this;
   };
+
 
   items.forEach(item => {
     item.addEventListener('click', handleCheck);
