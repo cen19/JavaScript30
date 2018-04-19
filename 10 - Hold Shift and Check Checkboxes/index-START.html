@@ -99,6 +99,29 @@
   </div>
 
 <script>
+  const items = document.querySelectorAll('.item input[type=checkbox]');
+
+  let lastClicked = '';
+  const toggleShift = function(e) {
+    if (!e.shiftKey) {
+      lastClicked = e.target.dataset.idx;
+    } else {
+      let currentClick = e.target.dataset.idx;
+      for (let i = 0; i < (Math.abs(currentClick - lastClicked) + 1); i++) {
+        items[i].checked = true;
+      }
+    }
+    console.log(e);
+  };
+  items.forEach((item, index) => {
+    item.addEventListener('click', toggleShift);
+    item.setAttribute('data-idx', index);
+  });
+  console.log(items);
+
+
+
+  // window.addEventListener('keydown', toggleShift);
 </script>
 </body>
 </html>
