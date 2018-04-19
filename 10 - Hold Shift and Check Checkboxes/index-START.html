@@ -99,29 +99,28 @@
   </div>
 
 <script>
-  const items = document.querySelectorAll('.item input[type=checkbox]');
+  const items = document.querySelectorAll('.inbox input[type=checkbox]');
 
   let lastClicked = '';
-  const toggleShift = function(e) {
-    if (!e.shiftKey) {
-      lastClicked = e.target.dataset.idx;
-    } else {
-      let currentClick = e.target.dataset.idx;
-      for (let i = 0; i < (Math.abs(currentClick - lastClicked) + 1); i++) {
-        items[i].checked = true;
-      }
+// looping through and checking for the 'check' is more robust becuase it'll still work if someone changes some of the HTML DOM elements
+  const handleCheck = function(e) {
+    let inBetween = false;
+    if (e.shiftKey && this.checked) {
+      items.forEach(item => {
+        if (item === this || item === lastClicked) {
+          inBetween = !inBetween;
+        }
+        if (inBetween) {
+          item.checked = true;
+        }
+      });
     }
-    console.log(e);
+    lastClicked = this;
   };
-  items.forEach((item, index) => {
-    item.addEventListener('click', toggleShift);
-    item.setAttribute('data-idx', index);
+
+  items.forEach(item => {
+    item.addEventListener('click', handleCheck);
   });
-  console.log(items);
-
-
-
-  // window.addEventListener('keydown', toggleShift);
 </script>
 </body>
 </html>
