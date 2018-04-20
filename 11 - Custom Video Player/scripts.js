@@ -25,11 +25,13 @@ const toggleFullscreen = function() {
   } else {
     document.webkitExitFullscreen();
   }
+  updateFullScreenButton();
 };
 
-// const updateFullScreenButton = function() {
-//   const icon = 
-// }
+const updateFullScreenButton = function() {
+  const icon = document.webkitIsFullScreen ? '[ ]' : '[x]';
+  fullscreen.textContent = icon;
+};
 
 const updateButton = function() {
   const icon = this.paused ? '►' : '❚ ❚';
