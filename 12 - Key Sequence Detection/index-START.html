@@ -7,6 +7,19 @@
 </head>
 <body>
 <script>
+  const pressedKeys = [];
+  const target = 'cen';
+
+window.addEventListener('keyup', (e) => {
+    pressedKeys.push(e.key);
+    pressedKeys.splice(-target.length - 1, pressedKeys.length - target.length);
+    console.log(pressedKeys);
+    if (pressedKeys.join('').includes(target)) {
+      console.log('CODE ACTIVATED');
+      cornify_add();
+    }
+  });
+
 </script>
 </body>
 </html>
