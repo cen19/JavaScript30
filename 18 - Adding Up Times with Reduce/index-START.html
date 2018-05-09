@@ -182,6 +182,26 @@
     </li>
   </ul>
 <script>
+  const timeNodes = [...document.querySelectorAll('[data-time]')]; //spread it into an array to use reduce on it
+  console.log(timeNodes);
+  let timed = timeNodes.reduce((total, node) => {
+    let time = (node.dataset.time).split(':');
+    return total += time.reduce(function(sum, curr, idx) {
+      if (idx === 0) {
+        return sum = Number(sum) + (Number(curr) * 60);
+      } else {
+        return sum = Number(sum) + Number(curr);
+      }
+    }, 0);
+  }, 0);
+
+  const hours = Math.floor(timed / 3600);
+  const minutes = Math.floor(timed % 3600 / 60);
+  const seconds = timed % 3600 % 60 % 60;
+
+  console.log(hours, minutes, seconds);
+
+
 </script>
 </body>
 </html>
